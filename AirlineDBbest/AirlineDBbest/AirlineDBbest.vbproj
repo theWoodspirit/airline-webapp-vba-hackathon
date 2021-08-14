@@ -162,6 +162,7 @@
     <Compile Include="App_Start\FilterConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Controllers\AdminsController.vb" />
+    <Compile Include="Controllers\DefaultController.vb" />
     <Compile Include="Controllers\FluegesController.vb" />
     <Compile Include="Controllers\PassagieresController.vb" />
     <Compile Include="Controllers\PilotensController.vb" />
@@ -289,6 +290,15 @@
     <Content Include="Views\Pilotens\Details.vbhtml" />
     <Content Include="Views\Pilotens\Edit.vbhtml" />
     <Content Include="Views\Pilotens\Index.vbhtml" />
+    <Content Include="Views\Admins\Login.vbhtml" />
+    <Content Include="Views\Admins\getPilots.vbhtml" />
+    <Content Include="Views\Admins\getPassagiere.vbhtml" />
+    <Content Include="Views\Admins\getAdmins.vbhtml" />
+    <Content Include="Views\Admins\getFluege.vbhtml" />
+    <Content Include="Views\Admins\NoAccess.vbhtml" />
+    <Content Include="Views\Passagieres\getAlleFluege.vbhtml" />
+    <Content Include="Views\Passagieres\getMyFluege.vbhtml" />
+    <Content Include="Views\Passagieres\Login.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -319,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,12 +1,5 @@
-﻿Imports System
-Imports System.Collections.Generic
-Imports System.Data
-Imports System.Data.Entity
-Imports System.Linq
+﻿Imports System.Data.Entity
 Imports System.Net
-Imports System.Web
-Imports System.Web.Mvc
-Imports AirlineDBbest
 
 Namespace Controllers
     Public Class PassagieresController
@@ -15,8 +8,15 @@ Namespace Controllers
         Private db As New Database1Entities
 
         ' GET: Passagieres
+
         Function Index() As ActionResult
-            Return View(db.Passagiere.ToList())
+            Dim Passagieres As Passagiere = db.Passagiere.Find(TempData("nextID"))
+            If IsNothing(Passagieres) Then
+                Return HttpNotFound()
+            End If
+
+            Return View(Passagieres)
+
         End Function
 
         ' GET: Passagieres/Details/5
@@ -41,14 +41,21 @@ Namespace Controllers
         'Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost()>
         <ValidateAntiForgeryToken()>
-        Function Create(<Bind(Include:="Anr,Name,Vorname,Email,Password")> ByVal passagiere As Passagiere) As ActionResult
+        Function Create(<Bind(Include:="Anr,Name,Vorname,Email,Password")> ByVal passagieres As Passagiere) As ActionResult
             If ModelState.IsValid Then
-                db.Passagiere.Add(passagiere)
+                db.Passagiere.Add(passagieres)
                 db.SaveChanges()
-                Return RedirectToAction("Index")
+                TempData("nextID") = passagieres.ID
+                Return View("Index")
             End If
-            Return View(passagiere)
+            Return View(passagieres)
         End Function
+
+        'Get :  AllFlights
+        Function getAlleFluege() As ActionResult
+            Return View(db.Fluege.ToList())
+        End Function
+
 
         ' GET: Passagieres/Edit/5
         Function Edit(ByVal id As Integer?) As ActionResult
@@ -71,7 +78,7 @@ Namespace Controllers
             If ModelState.IsValid Then
                 db.Entry(passagiere).State = EntityState.Modified
                 db.SaveChanges()
-                Return RedirectToAction("Index")
+                Return Redirect("~")
             End If
             Return View(passagiere)
         End Function
@@ -96,7 +103,27 @@ Namespace Controllers
             Dim passagiere As Passagiere = db.Passagiere.Find(id)
             db.Passagiere.Remove(passagiere)
             db.SaveChanges()
-            Return RedirectToAction("Index")
+            Return Redirect("~")
+        End Function
+
+        Function Login() As ActionResult
+            Return View()
+        End Function
+
+        ' POST: Admins/Login
+        'Aktivieren Sie zum Schutz vor Angriffen durch Overposting die jeweiligen Eigenschaften, mit denen eine Bindung erfolgen soll. 
+        'Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
+        <HttpPost()>
+        <ValidateAntiForgeryToken()>
+        Function Login(ID As Integer, Email As String, Password As String) As ActionResult
+
+
+            Dim x As Passagiere = db.Passagiere.Find(ID)
+            If Not IsNothing(x) And x.Email = Email And x.Password = Password Then
+                TempData("nextID") = x.ID
+                Return RedirectToAction("Index", New Integer = x.ID)
+            End If
+            Return HttpNotFound()
         End Function
 
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -107,3 +134,4 @@ Namespace Controllers
         End Sub
     End Class
 End Namespace
+

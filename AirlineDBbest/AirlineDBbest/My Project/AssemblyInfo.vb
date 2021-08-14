@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' Allgemeine Informationen zu einer Assembly werden durch Folgendes gesteuert:

@@ -1,56 +1,74 @@
-﻿@ModelType IEnumerable(Of AirlineDBbest.Passagiere)
+﻿@ModelType Passagiere
+
 @Code
-ViewData("Title") = "Index"
+    ViewData("Title") = "Index"
 End Code
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+<p>@Html.ActionLink("get  alle Fluege", "getAlleFluege")</p>
+
+
+@Code
+    ViewData("Title") = "getMyFluege"
+End Code
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(Function(model) model.Anr)
+            a
         </th>
         <th>
-            @Html.DisplayNameFor(Function(model) model.Name)
+           b
         </th>
         <th>
-            @Html.DisplayNameFor(Function(model) model.Vorname)
+            datum
         </th>
         <th>
-            @Html.DisplayNameFor(Function(model) model.Email)
+            zeitpunkt
         </th>
         <th>
-            @Html.DisplayNameFor(Function(model) model.Password)
+            landung
+        </th>
+        <th>
+            anzahlpassagiere
+        </th>
+        <th>
+            pilot
         </th>
         <th></th>
     </tr>
 
-@For Each item In Model
-    @<tr>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Anr)
-        </td>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Vorname)
-        </td>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", New With {.id = item.ID }) |
-            @Html.ActionLink("Details", "Details", New With {.id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", New With {.id = item.ID })
-        </td>
-    </tr>
-Next
+    @For Each item In Model.Fluege
+        @<tr>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.Flugziel)
+            </td>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.Abflugsort)
+            </td>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.Datum)
+            </td>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.Startzeitpunkt)
+            </td>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.Landung)
+            </td>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.AnzahlPassagiere)
+            </td>
+            <td>
+                @Html.DisplayFor(Function(modelItem) item.Piloten.Anr)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", New With {.id = item.ID}) |
+                @Html.ActionLink("Delete", "Delete", New With {.id = item.ID})
+            </td>
+        </tr>
+    Next
 
 </table>
+

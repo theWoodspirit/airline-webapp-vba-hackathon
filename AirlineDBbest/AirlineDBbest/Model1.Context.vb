@@ -22,7 +22,7 @@ Partial Public Class Database1Entities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property Admins() As DbSet(Of Admins)
+    Public Overridable Property Passagieres() As DbSet(Of Admins)
     Public Overridable Property Fluege() As DbSet(Of Fluege)
     Public Overridable Property Passagiere() As DbSet(Of Passagiere)
     Public Overridable Property Piloten() As DbSet(Of Piloten)
