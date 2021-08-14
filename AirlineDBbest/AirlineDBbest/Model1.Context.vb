@@ -11,19 +11,21 @@ Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
 
-Partial Public Class Database1Entities
+Partial Public Class Database1Entities2
     Inherits DbContext
 
     Public Sub New()
-        MyBase.New("name=Database1Entities")
+        MyBase.New("name=Database1Entities2")
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property Passagieres() As DbSet(Of Admins)
+    Public Overridable Property Admins() As DbSet(Of Admins)
     Public Overridable Property Fluege() As DbSet(Of Fluege)
+    Public Overridable Property FluegeToPassagier() As DbSet(Of FluegeToPassagier)
+    Public Overridable Property FlugToAdmin() As DbSet(Of FlugToAdmin)
     Public Overridable Property Passagiere() As DbSet(Of Passagiere)
     Public Overridable Property Piloten() As DbSet(Of Piloten)
 

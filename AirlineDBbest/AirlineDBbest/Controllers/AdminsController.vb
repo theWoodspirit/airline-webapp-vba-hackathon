@@ -5,7 +5,7 @@ Namespace Controllers
     Public Class AdminsController
         Inherits System.Web.Mvc.Controller
 
-        Private db As New Database1Entities
+        Private db As New Database1Entities2
 
         ' GET: Admins
 
@@ -13,7 +13,7 @@ Namespace Controllers
 
         Function Index(ByVal id As Integer?) As ActionResult
 
-            Dim admins As Admins = db.Passagieres.Find(id)
+            Dim admins As Admins = db.Admins.Find(id)
 
             Return View()
 
@@ -25,7 +25,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim admins As Admins = db.Passagieres.Find(id)
+            Dim admins As Admins = db.Admins.Find(id)
             If IsNothing(admins) Then
                 Return HttpNotFound()
             End If
@@ -50,7 +50,7 @@ Namespace Controllers
         Function Login(ID As Integer, Email As String, Password As String) As ActionResult
 
 
-            Dim admins As Admins = db.Passagieres.Find(ID)
+            Dim admins As Admins = db.Admins.Find(ID)
             If Not IsNothing(admins) And admins.Password = Password Then
                 Return RedirectToAction("Index", New Integer = admins.ID)
             End If
@@ -64,7 +64,7 @@ Namespace Controllers
             Return View(db.Passagiere.ToList())
         End Function
         Function getAdmins() As ActionResult
-            Return View(db.Passagieres.ToList())
+            Return View(db.Admins.ToList())
         End Function
         Function getFluege() As ActionResult
             Return View(db.Fluege.ToList())
@@ -84,7 +84,7 @@ Namespace Controllers
         <ValidateAntiForgeryToken()>
         Function Create(<Bind(Include:="Anr,Name,Vorname,Email,Password")> ByVal admins As Admins) As ActionResult
             If ModelState.IsValid Then
-                db.Passagieres.Add(admins)
+                db.Admins.Add(admins)
                 db.SaveChanges()
                 Return RedirectToAction("Index", New Integer = admins.ID)
             End If
@@ -96,7 +96,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim admins As Admins = db.Passagieres.Find(id)
+            Dim admins As Admins = db.Admins.Find(id)
             If IsNothing(admins) Then
                 Return HttpNotFound()
             End If
@@ -122,7 +122,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim admins As Admins = db.Passagieres.Find(id)
+            Dim admins As Admins = db.Admins.Find(id)
             If IsNothing(admins) Then
                 Return HttpNotFound()
             End If
@@ -134,8 +134,8 @@ Namespace Controllers
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
         Function DeleteConfirmed(ByVal id As Integer) As ActionResult
-            Dim admins As Admins = db.Passagieres.Find(id)
-            db.Passagieres.Remove(admins)
+            Dim admins As Admins = db.Admins.Find(id)
+            db.Admins.Remove(admins)
             db.SaveChanges()
             Return RedirectToAction("Index")
         End Function

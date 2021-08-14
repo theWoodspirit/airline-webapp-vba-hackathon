@@ -1,4 +1,4 @@
-﻿@ModelType Passagiere
+﻿@ModelType FluegeToPassagier 
 
 @Code
     ViewData("Title") = "Index"
@@ -20,7 +20,7 @@ End Code
             a
         </th>
         <th>
-           b
+            b
         </th>
         <th>
             datum
@@ -39,7 +39,7 @@ End Code
         </th>
         <th></th>
     </tr>
-
+ 
     @For Each item In Model.Fluege
         @<tr>
             <td>
@@ -69,6 +69,7 @@ End Code
             </td>
         </tr>
     Next
+ 
 
 </table>
 

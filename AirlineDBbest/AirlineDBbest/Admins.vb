@@ -18,6 +18,6 @@ Partial Public Class Admins
     Public Property Email As String
     Public Property Password As String
 
-    Public Overridable Property Fluege As ICollection(Of Fluege) = New HashSet(Of Fluege)
+    Public Overridable Property FlugToAdmin As ICollection(Of FlugToAdmin) = New HashSet(Of FlugToAdmin)
 
 End Class

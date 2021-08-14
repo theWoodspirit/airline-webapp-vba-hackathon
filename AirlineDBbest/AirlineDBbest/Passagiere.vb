@@ -18,6 +18,6 @@ Partial Public Class Passagiere
     Public Property Email As String
     Public Property Password As String
 
-    Public Overridable Property Fluege As ICollection(Of Fluege) = New HashSet(Of Fluege)
+    Public Overridable Property FluegeToPassagier As ICollection(Of FluegeToPassagier) = New HashSet(Of FluegeToPassagier)
 
 End Class

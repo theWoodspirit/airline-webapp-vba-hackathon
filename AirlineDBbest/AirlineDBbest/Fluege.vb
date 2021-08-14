@@ -17,11 +17,11 @@ Partial Public Class Fluege
     Public Property Datum As Nullable(Of Date)
     Public Property Startzeitpunkt As Nullable(Of System.TimeSpan)
     Public Property Landung As String
-    Public Property AnzahlPassagiere As Nullable(Of Integer) = 0
+    Public Property AnzahlPassagiere As Nullable(Of Integer)
     Public Property PilotID As Nullable(Of Integer)
 
     Public Overridable Property Piloten As Piloten
-    Public Overridable Property Passagiere As ICollection(Of Passagiere) = New HashSet(Of Passagiere)
-    Public Overridable Property Admins As ICollection(Of Admins) = New HashSet(Of Admins)
+    Public Overridable Property FluegeToPassagier As ICollection(Of FluegeToPassagier) = New HashSet(Of FluegeToPassagier)
+    Public Overridable Property FlugToAdmin As ICollection(Of FlugToAdmin) = New HashSet(Of FlugToAdmin)
 
 End Class

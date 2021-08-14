@@ -5,18 +5,55 @@ Namespace Controllers
     Public Class PassagieresController
         Inherits System.Web.Mvc.Controller
 
-        Private db As New Database1Entities
+        Private db As New Database1Entities2
 
         ' GET: Passagieres
 
-        Function Index() As ActionResult
-            Dim Passagieres As Passagiere = db.Passagiere.Find(TempData("nextID"))
+        Function Index(ByVal id As Integer?) As ActionResult
+            Dim Passagieres As Passagiere = db.Passagiere.Find(id)
             If IsNothing(Passagieres) Then
-                Return HttpNotFound()
+                Passagieres = db.Passagiere.Find(TempData("nextID"))
+                TempData("nextID") = Passagieres.ID
             End If
 
-            Return View(Passagieres)
+            Return Vie
 
+        End Function
+        Function Buchen(ByVal id As Integer?) As ActionResult
+            If IsNothing(id) Then
+                Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
+            End If
+
+            Dim Fluege As Fluege = db.Fluege.Find(id)
+            Dim Passagieres As Passagiere = db.Passagiere.Find(TempData("nextID"))
+            TempData("nextID") = Passagieres.ID
+            If IsNothing(Fluege) Then
+                Return HttpNotFound()
+            End If
+            ViewBag.PilotID = New SelectList(db.Piloten, "ID", "Anr", Fluege.PilotID)
+
+            Return View(Fluege)
+        End Function
+
+        ' POST: Passagieres/Edit/5
+        'Aktivieren Sie zum Schutz vor Angriffen durch Overposting die jeweiligen Eigenschaften, mit denen eine Bindung erfolgen soll. 
+        'Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
+        <HttpPost()>
+        <ValidateAntiForgeryToken()>
+        Function Buchen(<Bind(Include:="ID,Flugziel,Abflugsort,Datum,Startzeitpunkt,Landung,AnzahlPassagiere,PilotID")> ByVal fluege As Fluege) As ActionResult
+            Dim Passagieres As Passagiere = db.Passagiere.Find(TempData("nextID"))
+
+
+            TempData("nextID") = Passagieres.ID
+            If ModelState.IsValid Then
+
+                db.SaveChanges()
+                Return Redirect("Index")
+            End If
+
+            ViewBag.PilotID = New SelectList(db.Piloten, "ID", "Anr", fluege.PilotID)
+
+            Return View(fluege)
         End Function
 
         ' GET: Passagieres/Details/5
@@ -55,6 +92,8 @@ Namespace Controllers
         Function getAlleFluege() As ActionResult
             Return View(db.Fluege.ToList())
         End Function
+
+
 
 
         ' GET: Passagieres/Edit/5
@@ -121,7 +160,7 @@ Namespace Controllers
             Dim x As Passagiere = db.Passagiere.Find(ID)
             If Not IsNothing(x) And x.Email = Email And x.Password = Password Then
                 TempData("nextID") = x.ID
-                Return RedirectToAction("Index", New Integer = x.ID)
+                Return RedirectToAction("Index")
             End If
             Return HttpNotFound()
         End Function

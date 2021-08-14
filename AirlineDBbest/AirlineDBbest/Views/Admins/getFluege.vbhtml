@@ -6,7 +6,7 @@ End Code
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create", "FluegesController", "Create")
 </p>
 <table class="table">
     <tr>
@@ -58,9 +58,10 @@ End Code
                 @Html.DisplayFor(Function(modelItem) item.Piloten.Anr)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", New With {.id = item.ID}) |
-                @Html.ActionLink("Details", "Details", New With {.id = item.ID}) |
-                @Html.ActionLink("Delete", "Delete", New With {.id = item.ID})
+                
+
+                @Html.ActionLink("Details", "FluegesController", "Details", New With {.id = item.ID}) |
+                @Html.ActionLink("Delete", "FluegesController", "Delete", New With {.id = item.ID}) |
             </td>
         </tr>
     Next

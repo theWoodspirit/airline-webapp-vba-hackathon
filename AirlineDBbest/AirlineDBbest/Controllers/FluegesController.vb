@@ -5,7 +5,7 @@ Namespace Controllers
     Public Class FluegesController
         Inherits System.Web.Mvc.Controller
 
-        Private db As New Database1Entities
+        Private db As New Database1Entities2
 
         ' GET: Flueges
         Function Index() As ActionResult
@@ -48,31 +48,6 @@ Namespace Controllers
 
 
 
-        Function Buchen(ByVal id As Integer?) As ActionResult
-            If IsNothing(id) Then
-                Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
-            End If
-
-            Dim Fluege As Fluege = db.Fluege.Find(id)
-            If IsNothing(Fluege) Then
-                Return HttpNotFound()
-            End If
-            ViewBag.PilotID = New SelectList(db.Piloten, "ID", "Anr", Fluege.PilotID)
-            Return View("Index")
-        End Function
-
-        ' POST: Passagieres/Edit/5
-        'Aktivieren Sie zum Schutz vor Angriffen durch Overposting die jeweiligen Eigenschaften, mit denen eine Bindung erfolgen soll. 
-        'Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
-        Function Buchen(<Bind(Include:="ID,Flugziel,Abflugsort,Datum,Startzeitpunkt,Landung,AnzahlPassagiere+1,PilotID")> ByVal fluege As Fluege) As ActionResult
-            If ModelState.IsValid Then
-                db.Entry(fluege).State = EntityState.Modified
-                db.SaveChanges()
-                Return RedirectToAction("Index")
-            End If
-            ViewBag.PilotID = New SelectList(db.Piloten, "ID", "Anr", fluege.PilotID)
-            Return View(fluege)
-        End Function
 
         ' GET: Flueges/Edit/5
         Function Edit(ByVal id As Integer?) As ActionResult

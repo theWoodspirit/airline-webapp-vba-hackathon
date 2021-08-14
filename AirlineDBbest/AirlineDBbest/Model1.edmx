@@ -29,23 +29,19 @@
           <Property Name="AnzahlPassagiere" Type="int" />
           <Property Name="PilotID" Type="int" />
         </EntityType>
-        <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\AIRLINEDBBEST\APP_DATA\DATABASE1.MDF.dbo.FluegeToPassagier' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
         <EntityType Name="FluegeToPassagier">
           <Key>
-            <PropertyRef Name="FlugID" />
-            <PropertyRef Name="PasID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FlugID" Type="int" Nullable="false" />
           <Property Name="PasID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Während der Generierung sind Fehler aufgetreten:
-Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\AIRLINEDBBEST\APP_DATA\DATABASE1.MDF.dbo.FlugToAdmin' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
         <EntityType Name="FlugToAdmin">
           <Key>
-            <PropertyRef Name="FlugID" />
-            <PropertyRef Name="AdminID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FlugID" Type="int" Nullable="false" />
           <Property Name="AdminID" Type="int" Nullable="false" />
         </EntityType>
@@ -83,7 +79,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FluegeToP__FlugI__2F10007B">
+        <Association Name="FK__FluegeToP__FlugI__4D94879B">
           <End Role="Fluege" Type="Self.Fluege" Multiplicity="1" />
           <End Role="FluegeToPassagier" Type="Self.FluegeToPassagier" Multiplicity="*" />
           <ReferentialConstraint>
@@ -95,7 +91,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FluegeToP__PasID__300424B4">
+        <Association Name="FK__FluegeToP__PasID__4E88ABD4">
           <End Role="Passagiere" Type="Self.Passagiere" Multiplicity="1" />
           <End Role="FluegeToPassagier" Type="Self.FluegeToPassagier" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +103,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FlugToAdm__Admin__30F848ED">
+        <Association Name="FK__FlugToAdm__Admin__4F7CD00D">
           <End Role="Admins" Type="Self.Admins" Multiplicity="1" />
           <End Role="FlugToAdmin" Type="Self.FlugToAdmin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +115,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FlugToAdm__FlugI__31EC6D26">
+        <Association Name="FK__FlugToAdm__FlugI__5070F446">
           <End Role="Fluege" Type="Self.Fluege" Multiplicity="1" />
           <End Role="FlugToAdmin" Type="Self.FlugToAdmin" Multiplicity="*" />
           <ReferentialConstraint>
@@ -134,37 +130,27 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
         <EntityContainer Name="Database1ModelStoreContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fluege" EntityType="Self.Fluege" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FluegeToPassagier" EntityType="Self.FluegeToPassagier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FlugToAdmin" EntityType="Self.FlugToAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Passagiere" EntityType="Self.Passagiere" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Piloten" EntityType="Self.Piloten" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FluegeToPassagier" EntityType="Self.FluegeToPassagier" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FluegeToPassagier].[FlugID] AS [FlugID], 
-    [FluegeToPassagier].[PasID] AS [PasID]
-    FROM [dbo].[FluegeToPassagier] AS [FluegeToPassagier]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="FlugToAdmin" EntityType="Self.FlugToAdmin" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FlugToAdmin].[FlugID] AS [FlugID], 
-    [FlugToAdmin].[AdminID] AS [AdminID]
-    FROM [dbo].[FlugToAdmin] AS [FlugToAdmin]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Fluege__PilotID__2E1BDC42" Association="Self.FK__Fluege__PilotID__2E1BDC42">
             <End Role="Piloten" EntitySet="Piloten" />
             <End Role="Fluege" EntitySet="Fluege" />
           </AssociationSet>
-          <AssociationSet Name="FK__FluegeToP__FlugI__2F10007B" Association="Self.FK__FluegeToP__FlugI__2F10007B">
+          <AssociationSet Name="FK__FluegeToP__FlugI__4D94879B" Association="Self.FK__FluegeToP__FlugI__4D94879B">
             <End Role="Fluege" EntitySet="Fluege" />
             <End Role="FluegeToPassagier" EntitySet="FluegeToPassagier" />
           </AssociationSet>
-          <AssociationSet Name="FK__FluegeToP__PasID__300424B4" Association="Self.FK__FluegeToP__PasID__300424B4">
+          <AssociationSet Name="FK__FluegeToP__PasID__4E88ABD4" Association="Self.FK__FluegeToP__PasID__4E88ABD4">
             <End Role="Passagiere" EntitySet="Passagiere" />
             <End Role="FluegeToPassagier" EntitySet="FluegeToPassagier" />
           </AssociationSet>
-          <AssociationSet Name="FK__FlugToAdm__Admin__30F848ED" Association="Self.FK__FlugToAdm__Admin__30F848ED">
+          <AssociationSet Name="FK__FlugToAdm__Admin__4F7CD00D" Association="Self.FK__FlugToAdm__Admin__4F7CD00D">
             <End Role="Admins" EntitySet="Admins" />
             <End Role="FlugToAdmin" EntitySet="FlugToAdmin" />
           </AssociationSet>
-          <AssociationSet Name="FK__FlugToAdm__FlugI__31EC6D26" Association="Self.FK__FlugToAdm__FlugI__31EC6D26">
+          <AssociationSet Name="FK__FlugToAdm__FlugI__5070F446" Association="Self.FK__FlugToAdm__FlugI__5070F446">
             <End Role="Fluege" EntitySet="Fluege" />
             <End Role="FlugToAdmin" EntitySet="FlugToAdmin" />
           </AssociationSet>
@@ -184,7 +170,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Fluege" Relationship="Self.FlugToAdmin" FromRole="Admins" ToRole="Fluege" />
+          <NavigationProperty Name="FlugToAdmin" Relationship="Self.FK__FlugToAdm__Admin__4F7CD00D" FromRole="Admins" ToRole="FlugToAdmin" />
         </EntityType>
         <EntityType Name="Fluege">
           <Key>
@@ -196,11 +182,31 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
           <Property Name="Datum" Type="DateTime" Precision="0" />
           <Property Name="Startzeitpunkt" Type="Time" Precision="7" />
           <Property Name="Landung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AnzahlPassagiere" Type="Int32" DefaultValue="0" />
+          <Property Name="AnzahlPassagiere" Type="Int32" />
           <Property Name="PilotID" Type="Int32" />
           <NavigationProperty Name="Piloten" Relationship="Self.FK__Fluege__PilotID__2E1BDC42" FromRole="Fluege" ToRole="Piloten" />
-          <NavigationProperty Name="Passagiere" Relationship="Self.FluegeToPassagier" FromRole="Fluege" ToRole="Passagiere" />
-          <NavigationProperty Name="Admins" Relationship="Self.FlugToAdmin" FromRole="Fluege" ToRole="Admins" />
+          <NavigationProperty Name="FluegeToPassagier" Relationship="Self.FK__FluegeToP__FlugI__4D94879B" FromRole="Fluege" ToRole="FluegeToPassagier" />
+          <NavigationProperty Name="FlugToAdmin" Relationship="Self.FK__FlugToAdm__FlugI__5070F446" FromRole="Fluege" ToRole="FlugToAdmin" />
+        </EntityType>
+        <EntityType Name="FluegeToPassagier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlugID" Type="Int32" Nullable="false" />
+          <Property Name="PasID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fluege" Relationship="Self.FK__FluegeToP__FlugI__4D94879B" FromRole="FluegeToPassagier" ToRole="Fluege" />
+          <NavigationProperty Name="Passagiere" Relationship="Self.FK__FluegeToP__PasID__4E88ABD4" FromRole="FluegeToPassagier" ToRole="Passagiere" />
+        </EntityType>
+        <EntityType Name="FlugToAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FlugID" Type="Int32" Nullable="false" />
+          <Property Name="AdminID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK__FlugToAdm__Admin__4F7CD00D" FromRole="FlugToAdmin" ToRole="Admins" />
+          <NavigationProperty Name="Fluege" Relationship="Self.FK__FlugToAdm__FlugI__5070F446" FromRole="FlugToAdmin" ToRole="Fluege" />
         </EntityType>
         <EntityType Name="Passagiere">
           <Key>
@@ -212,7 +218,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Fluege" Relationship="Self.FluegeToPassagier" FromRole="Passagiere" ToRole="Fluege" />
+          <NavigationProperty Name="FluegeToPassagier" Relationship="Self.FK__FluegeToP__PasID__4E88ABD4" FromRole="Passagiere" ToRole="FluegeToPassagier" />
         </EntityType>
         <EntityType Name="Piloten">
           <Key>
@@ -226,6 +232,18 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Fluege" Relationship="Self.FK__Fluege__PilotID__2E1BDC42" FromRole="Piloten" ToRole="Fluege" />
         </EntityType>
+        <Association Name="FK__FlugToAdm__Admin__4F7CD00D">
+          <End Role="Admins" Type="Self.Admins" Multiplicity="1" />
+          <End Role="FlugToAdmin" Type="Self.FlugToAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FlugToAdmin">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Fluege__PilotID__2E1BDC42">
           <End Role="Piloten" Type="Self.Piloten" Multiplicity="0..1" />
           <End Role="Fluege" Type="Self.Fluege" Multiplicity="*" />
@@ -238,30 +256,68 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FluegeToPassagier">
-          <End Role="Fluege" Type="Self.Fluege" Multiplicity="*" />
-          <End Role="Passagiere" Type="Self.Passagiere" Multiplicity="*" />
+        <Association Name="FK__FluegeToP__FlugI__4D94879B">
+          <End Role="Fluege" Type="Self.Fluege" Multiplicity="1" />
+          <End Role="FluegeToPassagier" Type="Self.FluegeToPassagier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fluege">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FluegeToPassagier">
+              <PropertyRef Name="FlugID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="FlugToAdmin">
-          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
-          <End Role="Fluege" Type="Self.Fluege" Multiplicity="*" />
+        <Association Name="FK__FlugToAdm__FlugI__5070F446">
+          <End Role="Fluege" Type="Self.Fluege" Multiplicity="1" />
+          <End Role="FlugToAdmin" Type="Self.FlugToAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fluege">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FlugToAdmin">
+              <PropertyRef Name="FlugID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__FluegeToP__PasID__4E88ABD4">
+          <End Role="Passagiere" Type="Self.Passagiere" Multiplicity="1" />
+          <End Role="FluegeToPassagier" Type="Self.FluegeToPassagier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passagiere">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FluegeToPassagier">
+              <PropertyRef Name="PasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admins" />
           <EntitySet Name="Fluege" EntityType="Self.Fluege" />
+          <EntitySet Name="FluegeToPassagier" EntityType="Self.FluegeToPassagier" />
+          <EntitySet Name="FlugToAdmin" EntityType="Self.FlugToAdmin" />
           <EntitySet Name="Passagiere" EntityType="Self.Passagiere" />
           <EntitySet Name="Piloten" EntityType="Self.Piloten" />
+          <AssociationSet Name="FK__FlugToAdm__Admin__4F7CD00D" Association="Self.FK__FlugToAdm__Admin__4F7CD00D">
+            <End Role="Admins" EntitySet="Admins" />
+            <End Role="FlugToAdmin" EntitySet="FlugToAdmin" />
+          </AssociationSet>
           <AssociationSet Name="FK__Fluege__PilotID__2E1BDC42" Association="Self.FK__Fluege__PilotID__2E1BDC42">
             <End Role="Piloten" EntitySet="Piloten" />
             <End Role="Fluege" EntitySet="Fluege" />
           </AssociationSet>
-          <AssociationSet Name="FluegeToPassagier" Association="Self.FluegeToPassagier">
+          <AssociationSet Name="FK__FluegeToP__FlugI__4D94879B" Association="Self.FK__FluegeToP__FlugI__4D94879B">
             <End Role="Fluege" EntitySet="Fluege" />
-            <End Role="Passagiere" EntitySet="Passagiere" />
+            <End Role="FluegeToPassagier" EntitySet="FluegeToPassagier" />
           </AssociationSet>
-          <AssociationSet Name="FlugToAdmin" Association="Self.FlugToAdmin">
-            <End Role="Admins" EntitySet="Admins" />
+          <AssociationSet Name="FK__FlugToAdm__FlugI__5070F446" Association="Self.FK__FlugToAdm__FlugI__5070F446">
             <End Role="Fluege" EntitySet="Fluege" />
+            <End Role="FlugToAdmin" EntitySet="FlugToAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FluegeToP__PasID__4E88ABD4" Association="Self.FK__FluegeToP__PasID__4E88ABD4">
+            <End Role="Passagiere" EntitySet="Passagiere" />
+            <End Role="FluegeToPassagier" EntitySet="FluegeToPassagier" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -269,7 +325,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities2">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="Database1Model.Admins">
               <MappingFragment StoreEntitySet="Admins">
@@ -293,6 +349,24 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
                 <ScalarProperty Name="Landung" ColumnName="Landung" />
                 <ScalarProperty Name="AnzahlPassagiere" ColumnName="AnzahlPassagiere" />
                 <ScalarProperty Name="PilotID" ColumnName="PilotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FluegeToPassagier">
+            <EntityTypeMapping TypeName="Database1Model.FluegeToPassagier">
+              <MappingFragment StoreEntitySet="FluegeToPassagier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FlugID" ColumnName="FlugID" />
+                <ScalarProperty Name="PasID" ColumnName="PasID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlugToAdmin">
+            <EntityTypeMapping TypeName="Database1Model.FlugToAdmin">
+              <MappingFragment StoreEntitySet="FlugToAdmin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FlugID" ColumnName="FlugID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -320,22 +394,6 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\SOURCE\REPOS\AIRLINEDBBEST\A
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FluegeToPassagier" TypeName="Database1Model.FluegeToPassagier" StoreEntitySet="FluegeToPassagier">
-            <EndProperty Name="Fluege">
-              <ScalarProperty Name="ID" ColumnName="FlugID" />
-            </EndProperty>
-            <EndProperty Name="Passagiere">
-              <ScalarProperty Name="ID" ColumnName="PasID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FlugToAdmin" TypeName="Database1Model.FlugToAdmin" StoreEntitySet="FlugToAdmin">
-            <EndProperty Name="Admins">
-              <ScalarProperty Name="ID" ColumnName="AdminID" />
-            </EndProperty>
-            <EndProperty Name="Fluege">
-              <ScalarProperty Name="ID" ColumnName="FlugID" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

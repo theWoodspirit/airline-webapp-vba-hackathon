@@ -5,7 +5,7 @@ Namespace Controllers
     Public Class PilotensController
         Inherits System.Web.Mvc.Controller
 
-        Private db As New Database1Entities
+        Private db As New Database1Entities2
 
         ' GET: Pilotens
         Function Index() As ActionResult

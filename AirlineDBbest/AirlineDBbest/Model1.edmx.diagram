@@ -4,14 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a13eb70bf23b4ad9859f3e529cc0743e" Name="Diagram1">
-        <EntityTypeShape EntityType="Database1Model.Admins" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.Fluege" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.Passagiere" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Database1Model.Piloten" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+      <Diagram DiagramId="b5e9b078ca854943811f1329994fe400" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.Admins" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Fluege" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.FluegeToPassagier" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.FlugToAdmin" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Passagiere" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Piloten" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.FK__FlugToAdm__Admin__4F7CD00D" ManuallyRouted="false" />
         <AssociationConnector Association="Database1Model.FK__Fluege__PilotID__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FluegeToPassagier" ManuallyRouted="false" />
-        <AssociationConnector Association="Database1Model.FlugToAdmin" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__FluegeToP__FlugI__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__FlugToAdm__FlugI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__FluegeToP__PasID__4E88ABD4" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

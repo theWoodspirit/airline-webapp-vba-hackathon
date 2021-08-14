@@ -10,7 +10,7 @@
     <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Fluege" Relationship="Self.FlugToAdmin" FromRole="Admins" ToRole="Fluege" />
+    <NavigationProperty Name="FlugToAdmin" Relationship="Self.FK__FlugToAdm__Admin__4F7CD00D" FromRole="Admins" ToRole="FlugToAdmin" />
   </EntityType>
   <EntityType Name="Fluege">
     <Key>
@@ -22,11 +22,31 @@
     <Property Name="Datum" Type="DateTime" Precision="0" />
     <Property Name="Startzeitpunkt" Type="Time" Precision="7" />
     <Property Name="Landung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="AnzahlPassagiere" Type="Int32" DefaultValue="0" />
+    <Property Name="AnzahlPassagiere" Type="Int32" />
     <Property Name="PilotID" Type="Int32" />
     <NavigationProperty Name="Piloten" Relationship="Self.FK__Fluege__PilotID__2E1BDC42" FromRole="Fluege" ToRole="Piloten" />
-    <NavigationProperty Name="Passagiere" Relationship="Self.FluegeToPassagier" FromRole="Fluege" ToRole="Passagiere" />
-    <NavigationProperty Name="Admins" Relationship="Self.FlugToAdmin" FromRole="Fluege" ToRole="Admins" />
+    <NavigationProperty Name="FluegeToPassagier" Relationship="Self.FK__FluegeToP__FlugI__4D94879B" FromRole="Fluege" ToRole="FluegeToPassagier" />
+    <NavigationProperty Name="FlugToAdmin" Relationship="Self.FK__FlugToAdm__FlugI__5070F446" FromRole="Fluege" ToRole="FlugToAdmin" />
+  </EntityType>
+  <EntityType Name="FluegeToPassagier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlugID" Type="Int32" Nullable="false" />
+    <Property Name="PasID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Fluege" Relationship="Self.FK__FluegeToP__FlugI__4D94879B" FromRole="FluegeToPassagier" ToRole="Fluege" />
+    <NavigationProperty Name="Passagiere" Relationship="Self.FK__FluegeToP__PasID__4E88ABD4" FromRole="FluegeToPassagier" ToRole="Passagiere" />
+  </EntityType>
+  <EntityType Name="FlugToAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlugID" Type="Int32" Nullable="false" />
+    <Property Name="AdminID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK__FlugToAdm__Admin__4F7CD00D" FromRole="FlugToAdmin" ToRole="Admins" />
+    <NavigationProperty Name="Fluege" Relationship="Self.FK__FlugToAdm__FlugI__5070F446" FromRole="FlugToAdmin" ToRole="Fluege" />
   </EntityType>
   <EntityType Name="Passagiere">
     <Key>
@@ -38,7 +58,7 @@
     <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Fluege" Relationship="Self.FluegeToPassagier" FromRole="Passagiere" ToRole="Fluege" />
+    <NavigationProperty Name="FluegeToPassagier" Relationship="Self.FK__FluegeToP__PasID__4E88ABD4" FromRole="Passagiere" ToRole="FluegeToPassagier" />
   </EntityType>
   <EntityType Name="Piloten">
     <Key>
@@ -52,6 +72,18 @@
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Fluege" Relationship="Self.FK__Fluege__PilotID__2E1BDC42" FromRole="Piloten" ToRole="Fluege" />
   </EntityType>
+  <Association Name="FK__FlugToAdm__Admin__4F7CD00D">
+    <End Role="Admins" Type="Self.Admins" Multiplicity="1" />
+    <End Role="FlugToAdmin" Type="Self.FlugToAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admins">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FlugToAdmin">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Fluege__PilotID__2E1BDC42">
     <End Role="Piloten" Type="Self.Piloten" Multiplicity="0..1" />
     <End Role="Fluege" Type="Self.Fluege" Multiplicity="*" />
@@ -64,30 +96,68 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FluegeToPassagier">
-    <End Role="Fluege" Type="Self.Fluege" Multiplicity="*" />
-    <End Role="Passagiere" Type="Self.Passagiere" Multiplicity="*" />
+  <Association Name="FK__FluegeToP__FlugI__4D94879B">
+    <End Role="Fluege" Type="Self.Fluege" Multiplicity="1" />
+    <End Role="FluegeToPassagier" Type="Self.FluegeToPassagier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fluege">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FluegeToPassagier">
+        <PropertyRef Name="FlugID" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
-  <Association Name="FlugToAdmin">
-    <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
-    <End Role="Fluege" Type="Self.Fluege" Multiplicity="*" />
+  <Association Name="FK__FlugToAdm__FlugI__5070F446">
+    <End Role="Fluege" Type="Self.Fluege" Multiplicity="1" />
+    <End Role="FlugToAdmin" Type="Self.FlugToAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fluege">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FlugToAdmin">
+        <PropertyRef Name="FlugID" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+  <Association Name="FK__FluegeToP__PasID__4E88ABD4">
+    <End Role="Passagiere" Type="Self.Passagiere" Multiplicity="1" />
+    <End Role="FluegeToPassagier" Type="Self.FluegeToPassagier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Passagiere">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FluegeToPassagier">
+        <PropertyRef Name="PasID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Admins" EntityType="Self.Admins" />
     <EntitySet Name="Fluege" EntityType="Self.Fluege" />
+    <EntitySet Name="FluegeToPassagier" EntityType="Self.FluegeToPassagier" />
+    <EntitySet Name="FlugToAdmin" EntityType="Self.FlugToAdmin" />
     <EntitySet Name="Passagiere" EntityType="Self.Passagiere" />
     <EntitySet Name="Piloten" EntityType="Self.Piloten" />
+    <AssociationSet Name="FK__FlugToAdm__Admin__4F7CD00D" Association="Self.FK__FlugToAdm__Admin__4F7CD00D">
+      <End Role="Admins" EntitySet="Admins" />
+      <End Role="FlugToAdmin" EntitySet="FlugToAdmin" />
+    </AssociationSet>
     <AssociationSet Name="FK__Fluege__PilotID__2E1BDC42" Association="Self.FK__Fluege__PilotID__2E1BDC42">
       <End Role="Piloten" EntitySet="Piloten" />
       <End Role="Fluege" EntitySet="Fluege" />
     </AssociationSet>
-    <AssociationSet Name="FluegeToPassagier" Association="Self.FluegeToPassagier">
+    <AssociationSet Name="FK__FluegeToP__FlugI__4D94879B" Association="Self.FK__FluegeToP__FlugI__4D94879B">
       <End Role="Fluege" EntitySet="Fluege" />
-      <End Role="Passagiere" EntitySet="Passagiere" />
+      <End Role="FluegeToPassagier" EntitySet="FluegeToPassagier" />
     </AssociationSet>
-    <AssociationSet Name="FlugToAdmin" Association="Self.FlugToAdmin">
-      <End Role="Admins" EntitySet="Admins" />
+    <AssociationSet Name="FK__FlugToAdm__FlugI__5070F446" Association="Self.FK__FlugToAdm__FlugI__5070F446">
       <End Role="Fluege" EntitySet="Fluege" />
+      <End Role="FlugToAdmin" EntitySet="FlugToAdmin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FluegeToP__PasID__4E88ABD4" Association="Self.FK__FluegeToP__PasID__4E88ABD4">
+      <End Role="Passagiere" EntitySet="Passagiere" />
+      <End Role="FluegeToPassagier" EntitySet="FluegeToPassagier" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
