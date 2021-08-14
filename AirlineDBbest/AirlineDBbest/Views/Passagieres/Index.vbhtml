@@ -1,4 +1,4 @@
-﻿@ModelType FluegeToPassagier 
+﻿@ModelType IEnumerable(Of AirlineDBbest.Fluege)
 
 @Code
     ViewData("Title") = "Index"
@@ -39,8 +39,8 @@ End Code
         </th>
         <th></th>
     </tr>
- 
-    @For Each item In Model.Fluege
+
+    @For Each item In Model
         @<tr>
             <td>
                 @Html.DisplayFor(Function(modelItem) item.Flugziel)
@@ -69,7 +69,7 @@ End Code
             </td>
         </tr>
     Next
- 
+
 
 </table>
 

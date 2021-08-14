@@ -16,7 +16,7 @@ Namespace Controllers
                 TempData("nextID") = Passagieres.ID
             End If
 
-            Return Vie
+            Return View(Passagieres.FluegeToPassagier.Union(Passagieres).ToList)
 
         End Function
         Function Buchen(ByVal id As Integer?) As ActionResult
