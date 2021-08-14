@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Anr" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Vorname" Type="varchar" MaxLength="50" />
@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Flugziel" Type="varchar" MaxLength="50" />
           <Property Name="Abflugsort" Type="varchar" MaxLength="50" />
           <Property Name="Datum" Type="date" />
@@ -51,7 +51,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Anr" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Vorname" Type="varchar" MaxLength="50" />
@@ -60,7 +60,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Anr" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Vorname" Type="varchar" MaxLength="50" />
@@ -172,7 +172,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Anr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -182,7 +182,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Flugziel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Abflugsort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Datum" Type="DateTime" Precision="0" />
@@ -198,7 +198,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Anr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -208,7 +208,7 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Anr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
