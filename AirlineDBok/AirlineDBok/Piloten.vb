@@ -15,6 +15,8 @@ Partial Public Class Piloten
     Public Property Anr As String
     Public Property Name As String
     Public Property Vorname As String
+    Public Property Email As String
+    Public Property Password As String
 
     Public Overridable Property Fluege As ICollection(Of Fluege) = New HashSet(Of Fluege)
 

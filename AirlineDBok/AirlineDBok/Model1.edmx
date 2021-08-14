@@ -177,6 +177,8 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Fluege" Relationship="Self.FlugToAdmin" FromRole="Admins" ToRole="Fluege" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Fluege">
           <Key>
@@ -203,6 +205,8 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Fluege" Relationship="Self.FluegeToPassagier" FromRole="Passagiere" ToRole="Fluege" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Piloten">
           <Key>
@@ -213,6 +217,8 @@ Warnung 6002: Für Tabelle/Sicht 'C:\USERS\Z00430RR\DESKTOP\AIRLINEDBOK\AIRLINED
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Fluege" Relationship="Self.FK__Fluege__PilotID__2E1BDC42" FromRole="Piloten" ToRole="Fluege" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="FK__Fluege__PilotID__2E1BDC42">
           <End Role="Piloten" Type="Self.Piloten" Multiplicity="0..1" />
