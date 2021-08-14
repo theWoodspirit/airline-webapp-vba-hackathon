@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="Database1Model.Admins">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Anr" ColumnName="Anr" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fluege">
+      <EntityTypeMapping TypeName="Database1Model.Fluege">
+        <MappingFragment StoreEntitySet="Fluege">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Flugziel" ColumnName="Flugziel" />
+          <ScalarProperty Name="Abflugsort" ColumnName="Abflugsort" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Startzeitpunkt" ColumnName="Startzeitpunkt" />
+          <ScalarProperty Name="Landung" ColumnName="Landung" />
+          <ScalarProperty Name="AnzahlPassagiere" ColumnName="AnzahlPassagiere" />
+          <ScalarProperty Name="PilotID" ColumnName="PilotID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Passagiere">
+      <EntityTypeMapping TypeName="Database1Model.Passagiere">
+        <MappingFragment StoreEntitySet="Passagiere">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Anr" ColumnName="Anr" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Piloten">
+      <EntityTypeMapping TypeName="Database1Model.Piloten">
+        <MappingFragment StoreEntitySet="Piloten">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Anr" ColumnName="Anr" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FluegeToPassagier" TypeName="Database1Model.FluegeToPassagier" StoreEntitySet="FluegeToPassagier">
+      <EndProperty Name="Fluege">
+        <ScalarProperty Name="ID" ColumnName="FlugID" />
+      </EndProperty>
+      <EndProperty Name="Passagiere">
+        <ScalarProperty Name="ID" ColumnName="PasID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FlugToAdmin" TypeName="Database1Model.FlugToAdmin" StoreEntitySet="FlugToAdmin">
+      <EndProperty Name="Admins">
+        <ScalarProperty Name="ID" ColumnName="AdminID" />
+      </EndProperty>
+      <EndProperty Name="Fluege">
+        <ScalarProperty Name="ID" ColumnName="FlugID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
